@@ -12,7 +12,7 @@ CREATE TABLE SpotifyClone.Albums(
   album_name VARCHAR(255) NOT NULL,
   release_year YEAR NOT NULL,
   artist_id INT,
-    FOREIGN KEY (artist_id) REFERENCES Artists (artist_id),
+    FOREIGN KEY (artist_id) REFERENCES Artists (artist_id)
 );
 
 CREATE TABLE SpotifyClone.Songs(
@@ -20,13 +20,13 @@ CREATE TABLE SpotifyClone.Songs(
   music_name VARCHAR(255) NOT NULL,
   music_duration_seconds INT NOT NULL,
   id_album INT NOT NULL,
-    FOREIGN KEY (id_album) REFERENCES Albums (album_id),
+    FOREIGN KEY (id_album) REFERENCES Albums (album_id)
 );
 
 CREATE TABLE SpotifyClone.Subscription_plans(
   subscription_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   subscription_name VARCHAR(45) NOT NULL,
-  subscription_value DOUBLE NOT NULL,
+  subscription_value DOUBLE NOT NULL
 );
 
 CREATE TABLE SpotifyClone.Users(
@@ -35,22 +35,15 @@ CREATE TABLE SpotifyClone.Users(
   user_age YEAR NOT NULL,
   subscription_id INT NOT NULL,
     FOREIGN KEY (subscription_id) REFERENCES Subscription_plans (subscription_id),
-  signature_date TIMESTAMP,
+  signature_date TIMESTAMP
 );
 
 CREATE TABLE SpotifyClone.Following_artists(
   user_id INT NOT NULL,
   artist_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users (user_id),
-    FOREIGN KEY (artist_id) REFERENCES Artists (artist_id),
-);
-
-CREATE TABLE SpotifyClone.Following_artists(
-  user_id INT NOT NULL,
-  artist_id INT NOT NULL,
-  CONSTRAINT PRIMARY KEY(user_id, artist_id)
-    FOREIGN KEY (user_id) REFERENCES Users (user_id),
-    FOREIGN KEY (artist_id) REFERENCES Artists (artist_id),
+    FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id),
+    FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists (artist_id),
+  CONSTRAINT follow_id PRIMARY KEY (user_id, artist_id)
 );
 
 CREATE TABLE SpotifyClone.History_played_songs(
@@ -59,7 +52,7 @@ CREATE TABLE SpotifyClone.History_played_songs(
   music_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users (user_id),
     FOREIGN KEY (music_id) REFERENCES Songs (music_id),
-  listened_on TIMESTAMP,
+  listened_on TIMESTAMP
 );
 
 INSERT INTO SpotifyClone.Artists (artist_name)
@@ -78,13 +71,14 @@ VALUES
   ('Hallowed Steam', 1995, 4),
   ('Incandescent', 1998, 3),
   ('Temporary Culture', 2001, 2),
-  ('Library of liberty', 2003, 2)
+  ('Library of liberty', 2003, 2),
   ('Chained Down', 2007, 5),
   ('Cabinet of fools', 2012, 5),
   ('No guarantees', 2015, 5),
-  ('Apparatus', 2015, 1),
+  ('Apparatus', 2015, 1);
 
-INSERT INTO SpotifyClone.Songs (music_name, music_duration_seconds, id_album)
+INSERT INTO SpotifyClone.Songs
+VALUES
   ('Soul For Us', 200, 1),
   ('Reflections Of Magic', 163, 1),
   ('Dance With Her Own', 116, 1),
