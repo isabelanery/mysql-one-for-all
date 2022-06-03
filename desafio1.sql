@@ -31,16 +31,17 @@ CREATE TABLE SpotifyClone.Subscription_plans(
 
 CREATE TABLE SpotifyClone.Users(
   user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_name VARCHAR(255) NOT NULL,
-  user_age YEAR NOT NULL,
+  user_name VARCHAR(100) NOT NULL,
+  user_age INT NOT NULL,
+  signature_date DATE,
   subscription_id INT NOT NULL,
-    FOREIGN KEY (subscription_id) REFERENCES Subscription_plans (subscription_id),
-  signature_date TIMESTAMP
+    FOREIGN KEY (subscription_id) REFERENCES SpotifyClone.Subscription_plans (subscription_id)
 );
 
 CREATE TABLE SpotifyClone.Following_artists(
   user_id INT NOT NULL,
   artist_id INT NOT NULL,
+  follow_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id),
     FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists (artist_id),
   CONSTRAINT follow_id PRIMARY KEY (user_id, artist_id)
@@ -50,10 +51,12 @@ CREATE TABLE SpotifyClone.History_played_songs(
   history_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   music_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users (user_id),
-    FOREIGN KEY (music_id) REFERENCES Songs (music_id),
+    FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id),
+    FOREIGN KEY (music_id) REFERENCES SpotifyClone.Songs (music_id),
   listened_on TIMESTAMP
 );
+
+SELECT * FROM SpotifyClone.Users;
 
 INSERT INTO SpotifyClone.Artists (artist_name)
 VALUES
@@ -77,7 +80,7 @@ VALUES
   ('No guarantees', 2015, 5),
   ('Apparatus', 2015, 1);
 
-INSERT INTO SpotifyClone.Songs
+INSERT INTO SpotifyClone.Songs (music_name, music_duration_seconds, id_album)
 VALUES
   ('Soul For Us', 200, 1),
   ('Reflections Of Magic', 163, 1),
@@ -127,16 +130,16 @@ VALUES
   ('pessoal', 6.99 ),
   ('familiar', 7.99 );
 
-INSERT INTO SpotifyClone.Users (user_name, user_age, subscription_id)
+INSERT INTO SpotifyClone.Users (user_name, user_age, signature_date, subscription_id)
 VALUES
-  ('Thati', 23, 2019-10-20, 1),
-  ('Cintia', 35, 2017-12-30, 4),
-  ('Bill', 20, 2019-06-05, 2),
-  ('Roger', 45, 2020-05-13, 3),
-  ('Norman', 58, 2017-02-17, 3),
-  ('Patrick', 33, 2017-01-06, 4),
-  ('Vivian', 26, 2018-01-05, 2),
-  ('Carol', 19 , 2018-02-14, 2),
-  ('Angelina', 42, 2018-04-29, 4),
-  ('Paul', 46, 2017-01-17, 4);
+  ('Thati', 23, "2019-10-20", 1),
+  ('Cintia', 35, "2017-12-30", 4),
+  ('Bill', 20, "2019-06-05", 2),
+  ('Roger', 45, "2020-05-13", 3),
+  ('Norman', 58, "2017-02-17", 3),
+  ('Patrick', 33, "2017-01-06", 4),
+  ('Vivian', 26, "2018-01-05", 2),
+  ('Carol', 19, "2018-02-14", 2),
+  ('Angelina', 42, "2018-04-29", 4),
+  ('Paul', 46, "2017-01-17", 4);
 
