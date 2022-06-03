@@ -39,18 +39,17 @@ CREATE TABLE SpotifyClone.Users(
 );
 
 CREATE TABLE SpotifyClone.Following_artists(
-  user_id INT NOT NULL,
   artist_id INT NOT NULL,
-  follow_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id),
+  user_id INT NOT NULL,
+  CONSTRAINT PRIMARY KEY (artist_id, user_id),
     FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists (artist_id),
-  CONSTRAINT follow_id PRIMARY KEY (user_id, artist_id)
+	  FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id)
 );
 
 CREATE TABLE SpotifyClone.History_played_songs(
-  history_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   music_id INT NOT NULL,
+  CONSTRAINT PRIMARY KEY (user_id, music_id),
     FOREIGN KEY (user_id) REFERENCES SpotifyClone.Users (user_id),
     FOREIGN KEY (music_id) REFERENCES SpotifyClone.Songs (music_id),
   listened_on TIMESTAMP
@@ -183,3 +182,28 @@ VALUES
     (10, 21, "2017-12-04 05:33:43"),
     (10, 12, "2017-07-27 05:24:49"),
     (10, 13, "2017-12-25 01:03:57");
+
+INSERT INTO SpotifyClone.Following_artists (artist_id, user_id)
+VALUES
+	(6, 1),
+  (2, 1),
+	(3, 1),
+  (6, 2),
+  (3, 2),
+  (4, 3),
+  (6, 3),
+  (2, 4),
+  (5, 5),
+  (1, 5),
+  (1, 6),
+  (3, 6),
+  (6, 6),
+  (4, 7),
+  (5, 7),
+  (6, 8),
+  (5, 8),
+  (1, 9),
+  (2, 9),
+  (3, 9),
+  (4, 10),
+  (1, 10);
