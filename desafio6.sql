@@ -5,4 +5,4 @@ SELECT
   CONVERT(ROUND(SUM(subscription_value), 2), NCHAR) AS faturamento_total
 FROM SpotifyClone.Users AS u
 INNER JOIN SpotifyClone.Subscription_plans AS s
-  ON u.subscription_id = s.subscription_id;
+ON u.subscription_id = s.subscription_id;
