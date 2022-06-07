@@ -144,7 +144,7 @@ VALUES
 
 INSERT INTO SpotifyClone.History_played_songs (user_id, music_id, listened_on)
 VALUES
-	(1, 36, "2020-02-28 10:45:55"),
+	  (1, 36, "2020-02-28 10:45:55"),
     (1, 25, "2020-05-02 05:30:35"),
     (1, 23, "2020-03-06 11:22:33"),
     (1, 14, "2020-08-05 08:05:17"),
